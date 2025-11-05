@@ -1,20 +1,19 @@
 {
-  "manifest_version": 3,
+ "manifest_version": 3,
   "name": "Meta Checker",
-  "version": "1.0",
-  "description": "ページのmeta情報を確認する拡張機能です",
-  "permissions": ["scripting", "activeTab"],
+  "version": "1.1",
+  "description": "サイトのメタデータを簡単に確認できる拡張機能です。",
+  "permissions": ["activeTab", "scripting"],
+  "background": {
+    "service_worker": "background.js"
+  },
   "action": {
-    "default_popup": "popup.html",
+    "default_title": "表示 / 非表示 Meta 情報",
     "default_icon": {
-      "16": "icons/16.png",
-      "48": "icons/48.png",
       "128": "icons/128.png"
     }
   },
   "icons": {
-    "16": "icons/16.png",
-    "48": "icons/48.png",
     "128": "icons/128.png"
   }
 }

@@ -1,0 +1,108 @@
+#meta-checker-wrapper {
+  position: fixed;
+  bottom: 16px;
+  right: 16px;
+  width: 560px;
+  max-height: 460px;
+  overflow: hidden;
+  background: #fff;
+  border-radius: 10px;
+  box-shadow: 0 0px 30px rgba(0,0,0,0.35);
+  font-family: sans-serif;
+  z-index: 999999;
+  padding: 20px;
+  padding-top: 60px;
+  color: black;
+}
+
+#meta-checker-panel {
+  width: auto;
+  max-height: 360px;
+  overflow: auto;
+  font-family: sans-serif;
+  padding: 20px;
+  padding-top: 0;
+  margin-top: 20px;
+  color: black;
+}
+
+.meta-checker-header {
+  position: absolute;
+  top:0;
+  left:0;
+  width: 100%;
+  font-weight: bold;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding-top: 20px;
+  padding-bottom: 20px;
+  background-color: #000;
+  color: white;
+  z-index: -1;
+}
+.meta-checker-header svg{
+  width: 150px;
+  height: auto;
+}
+.meta-checker-header:hover{
+  cursor:grab;
+}
+
+#meta-checker-panel table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 12px;
+}
+#meta-checker-panel thead {
+  font-weight: bold;
+  font-size: 12px;
+}
+
+#meta-checker-panel th,
+#meta-checker-panel td {
+  border-bottom: 1px solid #eee;
+  padding: 8px 6px;
+  text-align: left;
+  word-break:normal;
+  min-width: 120px;
+  line-height: 1.5;
+  letter-spacing: 0.1px;
+}
+
+.meta-checker-close {
+  position: absolute;
+  top: 12px;
+  right: 16px;
+  background: none;
+  border: none;
+  font-size: 24px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 24px;
+  height: 24px;
+  color: #fff;
+  cursor: pointer;
+}
+
+body {
+  scrollbar-width: thin; /* Firefox */
+  scrollbar-color: #ccc transparent;
+}
+
+/* Chrome, Edge, Safari */
+body::-webkit-scrollbar {
+  width: 8px;
+}
+body::-webkit-scrollbar-track {
+  background: transparent;
+}
+body::-webkit-scrollbar-thumb {
+  background: #ccc;
+  border-radius: 4px;
+}
+body::-webkit-scrollbar-thumb:hover {
+  background: #999;
+}
