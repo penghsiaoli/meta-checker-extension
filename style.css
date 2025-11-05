@@ -22,6 +22,7 @@
   font-family: sans-serif;
   padding: 20px;
   padding-top: 0;
+  padding-right: 10px;
   margin-top: 20px;
   color: black;
 }
@@ -66,10 +67,20 @@
   padding: 8px 6px;
   text-align: left;
   word-break:normal;
-  min-width: 120px;
   line-height: 1.5;
   letter-spacing: 0.1px;
+  word-break: break-all;
+  max-width: 300px;
 }
+#meta-checker-panel th:nth-child(1),
+#meta-checker-panel td:nth-child(1) {
+  min-width: 125px;
+}
+#meta-checker-panel th:nth-child(2),
+#meta-checker-panel td:nth-child(2) {
+  min-width: 90px;
+}
+
 
 .meta-checker-close {
   position: absolute;

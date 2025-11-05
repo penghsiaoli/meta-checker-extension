@@ -72,45 +72,72 @@
     header.style.cursor = "grab";
   });
 
-  // favicon
-  const favicon = document.querySelector('link[rel*="icon"]');
-  // canonical
-  const canonical = document.querySelector('link[rel="canonical"]');
-  // robots meta
-  const metaRobots = document.querySelector('meta[name="robots"]');
+
+  // --- checklist 定義 ---
+  const checklist = [
+  // --- 基本 SEO ---
+  { label: "title", selector: "title", required: true },
+  { label: "favicon", selector: 'link[rel*="icon"]', required: true },
+  { label: "description", selector: 'meta[name="description"]', required: true },
+  { label: "viewport", selector: 'meta[name="viewport"]', required: true },
+  
+  // --- Open Graph ---
+  { label: "og:title", selector: 'meta[property="og:title"]', required: true },
+  { label: "og:description", selector: 'meta[property="og:description"]', required: true },
+  { label: "og:image", selector: 'meta[property="og:image"]', required: true },
+  { label: "og:type", selector: 'meta[property="og:type"]', required: false },
+  { label: "og:url", selector: 'meta[property="og:url"]', required: false },
+  { label: "og:site_name", selector: 'meta[property="og:site_name"]', required: false },
+
+  // --- Twitter ---
+  { label: "twitter:card", selector: 'meta[name="twitter:card"]', required: true },
+  { label: "twitter:title", selector: 'meta[name="twitter:title"]', required: true },
+  { label: "twitter:description", selector: 'meta[name="twitter:description"]', required: true },
+  { label: "twitter:image", selector: 'meta[name="twitter:image"]', required: true },
+  { label: "twitter:site", selector: 'meta[name="twitter:site"]', required: false },
+
+  // --- その他 ---
+  { label: "theme-color", selector: 'meta[name="theme-color"]', required: false },
+  { label: "manifest", selector: 'link[rel="manifest"]', required: false },
+  { label: "apple-touch-icon", selector: 'link[rel="apple-touch-icon"]', required: false },
+  { label: "robots", selector: 'meta[name="robots"]', required: false },
+  { label: "canonical", selector: 'link[rel="canonical"]', required: false },
+  
+];
+
 
   const table = document.createElement("table");
   table.innerHTML = `
-    <thead>
-      <tr><th>name/property</th><th>content</th></tr>
-    </thead>
+    <thead><tr><th>項目</th><th>ステータス</th><th>内容</th></tr></thead>
     <tbody>
-      <tr>
-        <td>title<td/>
-        ${document.title || "（未設定）"}
-      <tr/>
-      <tr>
-        <td>favicon<td/>
-        ${favicon?.href && `<img src="${favicon.href}" style="width:48px;height:48px;vertical-align:middle;margin-right:4px; border: 1px solid #ddd;"></img>` || "（未設定）"}
-      <tr/>
-      
-      ${metas.map(m => `
-        <tr>
-          <td>${m.name}</td>
-          <td>${m.content}
-          ${(m.name==="og:image" || m.name==="twitter:image" || m.name==="twitter:image:secure_url")? `<br/><img src="${m.content}" style="max-width:200px; max-height:200px; margin-top:10px; margin-bottom:10px;"/>` : ``}
-          </td>
-        </tr>
-      `).join("")}
-
-      <tr>
-        <td>canonical<td/>
-        ${canonical ? canonical.href : "（未設定）"}
-      <tr/>
-      <tr>
-        <td>robots<td/>
-        ${metaRobots ? "設定あり" : "（未設定）"}
-      <tr/>
+      ${checklist.map(tag => {
+        const el = document.querySelector(tag.selector);
+        if (!el) {
+          return `<tr style="background:#ffe8e8;">
+                    <td>${tag.label}</td>
+                    <td>⚠️ Missing</td>
+                    <td>${tag.required ? "必須タグが存在しません" : "任意"}</td>
+                  </tr>`;
+        }
+        const val = el.getAttribute("content") || el.getAttribute("href") || el.textContent || "";
+        return `<tr style="background:#e8ffe8;">
+                  <td>${tag.label}</td>
+                  <td>✅ OK</td>
+                  <td>${val}
+                  ${
+                    // 判斷是否是圖片網址（以常見副檔名結尾或是 image CDN）
+                    /\.(png|jpe?g|gif|webp|svg|ico|)$/i.test(val)
+                      ? `<div style="margin-top:4px;">
+                          <img src="${val.startsWith('http') ? val : new URL(val, location.origin)}" 
+                                alt="${tag.label}" 
+                                style="${tag.label==="favicon" ? "max-width:48px; max-height:48px;" :"max-width:200px; max-height:200px;"} border-radius:1px; object-fit:cover;"
+                                onerror="this.style.display='none'"/>
+                        </div>`
+                      : ''
+                  }
+                  </td>
+                </tr>`;
+      }).join("")}
     </tbody>
   `;
   panel.appendChild(table);
