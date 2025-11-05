@@ -72,12 +72,28 @@
     header.style.cursor = "grab";
   });
 
+  // favicon
+  const favicon = document.querySelector('link[rel*="icon"]');
+  // canonical
+  const canonical = document.querySelector('link[rel="canonical"]');
+  // robots meta
+  const metaRobots = document.querySelector('meta[name="robots"]');
+
   const table = document.createElement("table");
   table.innerHTML = `
     <thead>
       <tr><th>name/property</th><th>content</th></tr>
     </thead>
     <tbody>
+      <tr>
+        <td>title<td/>
+        ${document.title || "（未設定）"}
+      <tr/>
+      <tr>
+        <td>favicon<td/>
+        ${favicon?.href && `<img src="${favicon.href}" style="width:48px;height:48px;vertical-align:middle;margin-right:4px; border: 1px solid #ddd;"></img>` || "（未設定）"}
+      <tr/>
+      
       ${metas.map(m => `
         <tr>
           <td>${m.name}</td>
@@ -86,6 +102,15 @@
           </td>
         </tr>
       `).join("")}
+
+      <tr>
+        <td>canonical<td/>
+        ${canonical ? canonical.href : "（未設定）"}
+      <tr/>
+      <tr>
+        <td>robots<td/>
+        ${metaRobots ? "設定あり" : "（未設定）"}
+      <tr/>
     </tbody>
   `;
   panel.appendChild(table);
