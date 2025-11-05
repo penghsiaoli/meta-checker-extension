@@ -1,13 +1,13 @@
 (() => {
-  // 清除舊樣式
+  // cleanup old style.css
   const oldLink = document.getElementById("meta-checker-style");
   if (oldLink) oldLink.remove();
 
-  // 注入新的 style.css
+  // insert new style.css
   const link = document.createElement("link");
   link.id = "meta-checker-style";
   link.rel = "stylesheet";
-  link.href = chrome.runtime.getURL("style.css") + `?v=${Date.now()}`; // 👈 加時間避免 cache
+  link.href = chrome.runtime.getURL("style.css") + `?v=${Date.now()}`; //タイムスタンプを追加 cacheを回避
   document.head.appendChild(link);
 
   const metas = Array.from(document.querySelectorAll("meta"))
@@ -15,7 +15,7 @@
       name: meta.getAttribute("name") || meta.getAttribute("property"),
       content: meta.getAttribute("content") || ""
     }))
-    .filter(m => m.name); // 🚫 排除沒有 name/property 的
+    .filter(m => m.name); // 🚫 name/propertyのない項目を除外
 
   const wrapper = document.createElement("div");
   wrapper.id = "meta-checker-wrapper";
@@ -26,7 +26,6 @@
 
   const header = document.createElement("div");
   header.className = "meta-checker-header";
-  // header.textContent = "🔍 Meta Checker";
   header.innerHTML=`
   <svg id="_レイヤー_2" data-name="レイヤー_2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 202.33 18.45">
     <g id="_レイヤー_1-2" data-name="レイヤー_1">
@@ -49,7 +48,7 @@
   wrapper.appendChild(header);
   wrapper.appendChild(panel);
 
-  // 🧭 拖曳功能
+  // 🧭 dragging functionality
   let isDragging = false;
   let offsetX, offsetY;
   
