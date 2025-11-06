@@ -79,7 +79,7 @@
   { label: "title", selector: "title", required: true },
   { label: "favicon", selector: 'link[rel*="icon"]', required: true },
   { label: "description", selector: 'meta[name="description"]', required: true },
-  { label: "viewport", selector: 'meta[name="viewport"]', required: true },
+  { label: "keywords", selector: 'meta[name="keywords"]', required: false }, 
   
   // --- Open Graph ---
   { label: "og:title", selector: 'meta[property="og:title"]', required: true },
@@ -90,10 +90,10 @@
   { label: "og:site_name", selector: 'meta[property="og:site_name"]', required: false },
 
   // --- Twitter ---
-  { label: "twitter:card", selector: 'meta[name="twitter:card"]', required: true },
-  { label: "twitter:title", selector: 'meta[name="twitter:title"]', required: true },
-  { label: "twitter:description", selector: 'meta[name="twitter:description"]', required: true },
-  { label: "twitter:image", selector: 'meta[name="twitter:image"]', required: true },
+  { label: "twitter:card", selector: 'meta[name="twitter:card"]', required: false },
+  { label: "twitter:title", selector: 'meta[name="twitter:title"]', required: false },
+  { label: "twitter:description", selector: 'meta[name="twitter:description"]', required: false },
+  { label: "twitter:image", selector: 'meta[name="twitter:image"]', required: false },
   { label: "twitter:site", selector: 'meta[name="twitter:site"]', required: false },
 
   // --- その他 ---
@@ -102,6 +102,7 @@
   { label: "apple-touch-icon", selector: 'link[rel="apple-touch-icon"]', required: false },
   { label: "robots", selector: 'meta[name="robots"]', required: false },
   { label: "canonical", selector: 'link[rel="canonical"]', required: false },
+  { label: "viewport", selector: 'meta[name="viewport"]', required: true },
   
 ];
 
