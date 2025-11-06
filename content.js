@@ -130,7 +130,7 @@
                       ? `<div style="margin-top:4px;">
                           <img src="${val.startsWith('http') ? val : new URL(val, location.origin)}" 
                                 alt="${tag.label}" 
-                                style="${tag.label==="favicon" ? "max-width:48px; max-height:48px;" :"max-width:200px; max-height:200px;"} border-radius:1px; object-fit:cover;"
+                                style="${tag.label==="favicon" || tag.label==="apple-touch-icon" ? "max-width:48px; max-height:48px;" :"max-width:200px; max-height:200px;"} border-radius:1px; object-fit:cover;"
                                 onerror="this.style.display='none'"/>
                         </div>`
                       : ''
